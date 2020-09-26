@@ -1,0 +1,19 @@
+star_radius:            1.0 # Solar Radii
+star_mass:              1.0 # Solar Mass
+planets:
+    - semi-major:       8.0 # star_radii
+      eccentricity:     0.3 # dimensionless
+      periastron_angle: 0.0 # degrees
+      inclination:      89.9 # degrees
+      planet_radius:    0.1 # star_radii
+      first_periastron: 0.0 # range = [0, 1]
+
+    - semi-major:       4.0 # star_radii
+      eccentricity:     0.3 # dimensionless
+      periastron_angle: 95.0 # degrees
+      inclination:      89.8 # degrees
+      planet_radius:    0.2 # star_radii
+      first_periastron: 0.7 # range = [0, 1]
+u:
+    - 0.7 # dimensionless
+    - 0.5 # dimensionless

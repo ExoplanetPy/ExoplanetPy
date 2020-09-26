@@ -1,0 +1,19 @@
+star_radius:            # in Solar Radii
+star_mass:              # in Solar Mass
+planets:
+    - semi-major:       # in star_radii
+      eccentricity:     # Dimensionless
+      periastron_angle: # in degrees
+      inclination:      # in degrees
+      planet_radius:    # in star_radii
+      first_periastron: # in range = [0, 1]
+
+    - semi-major:       # in star_radii
+      eccentricity:     # Dimensionless
+      periastron_angle: # in degrees
+      inclination:      # in degrees
+      planet_radius:    # in star_radii
+      first_periastron: # range = [0, 1]
+u:
+    - # Dimensionless
+    - # Dimensionless
