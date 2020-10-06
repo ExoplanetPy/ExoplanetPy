@@ -22,10 +22,6 @@ class System:
         for planet in self.planets:
             planet.setSplit(self.time_split * planet.period / self.total_time)
 
-    def limb_dark_two_params(self, cosine):
-        u = [0.1, 0.2]
-        return 1 - u[0] * (1 - cosine) - u[1] * ((1 - cosine)**2)
-
     def initialize_star(self, limb_func, split=1000):
         star = np.zeros((2 * split + 1, 2 * split + 1))
         total = 0
@@ -68,15 +64,6 @@ class System:
 
         return shadow, lum, star
 
-    def coords(self):
-        time_coord = []
-        for timing in self.timespan:
-            locs = []
-            for planet in self.planets:
-                locs.append(planet['coord_3d'](planet['alphas'](timing / planet['period'])))
-            time_coord.append(locs)
-        return time_coord
-
     def limb_dark(self, cosine):
         if len(self.u) == 2:
             return 1 - self.u[0] * (1 - cosine) - self.u[1] * ((1 - cosine)**2)
@@ -88,7 +75,8 @@ class System:
 
     def calc_lum(self, model='Quadratic', normalise=False):
         if model == 'Quadratic':
-            self.star, self.total = self.initialize_star(limb_func=self.limb_dark_two_params, split=self.img_split)
+            self.u = [0.1, 0.2]
+            self.star, self.total = self.initialize_star(limb_func=self.limb_dark, split=self.img_split)
         else:
             raise NameError("Model does not exist")
         self.timespan = np.linspace(0, int(self.n) * self.total_time, int(self.n) * self.time_split + 1)
