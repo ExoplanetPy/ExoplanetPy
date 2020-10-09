@@ -4,6 +4,10 @@ import numpy as np
 import scipy
 # from planet import Planet
 
+import numpy
+import sys
+numpy.set_printoptions(threshold=sys.maxsize)
+
 
 class System:
     def __init__(self, star_prop: dict, planet_list, sort=True):
@@ -13,13 +17,13 @@ class System:
         else:
             self.planet_list = planet_list
         self.img_split = 100
-        self.time_split = 100
-        self.n = 1.0
+        self.time_split = 10000
+        self.n = 2.0
         period_constant = (2 * np.pi) / ((scipy.constants.G * self.star_prop['Mass'] * 1.989e30)**0.5)
-        for planet in self.planets:
+        for planet in self.planet_list:
             planet.setPeriod(period_constant * ((planet.a * 6.96e8)**1.5) / (36 * 24))  # days
-        self.total_time = max([planet.period for planet in self.planets])
-        for planet in self.planets:
+        self.total_time = max([planet.period for planet in self.planet_list])
+        for planet in self.planet_list:
             planet.setSplit(self.time_split * planet.period / self.total_time)
 
     def initialize_star(self, limb_func, split=1000):
@@ -40,7 +44,7 @@ class System:
     def lum_wrt_coord(self, img, tot):
         split = int((len(img) - 1) / 2)
 
-        def shadow(self, coord_x, coord_y, R_p):
+        def shadow(coord_x, coord_y, R_p):
             nonlocal img, tot
             x, y, Rp = int(coord_x * split), int(coord_y * split), int(R_p * split)
             for i in range(-Rp, Rp + 1):
@@ -84,7 +88,7 @@ class System:
         for timing in self.timespan:
             update, get_lum, get_star = self.lum_wrt_coord(copy.deepcopy(self.star), copy.deepcopy(self.total))
             for planet in self.planet_list:
-                x, y = planet.getPosition(timing / planet.period)
+                x, y, z = planet.getPosition(timing / planet.period)
                 if y * (planet.i - (np.pi / 2)) > 0:  # Only the part of orbit which is away from us
                     continue
                 if x**2 + y**2 > 2 * ((1 + planet.r_p)**2):
@@ -101,7 +105,7 @@ class System:
         """Plot the transit curve"""
         lum = self.calc_lum(model, normalise)
 
-        fig = plt.figure(figsize=(20, 12))
+        fig = plt.figure(figsize=(10, 6))
         ax = fig.add_subplot(111)
         ax.scatter(self.timespan / 100, lum, s=1, c='b')
         ax.set_xlim(0, max(self.timespan) / 100)
@@ -109,7 +113,7 @@ class System:
         ax.tick_params(axis='y', labelsize=14)
         ax.set_xlabel('Time in days', fontsize=18)
         ax.set_ylabel('Relative luminosity', fontsize=18)
-        ax.set_title('Multiple Exoplanets - {} Planet system'.format(len(self.planet_list)), fontsize=22)
+        ax.set_title('Multiple Exoplanet - {} Planet system'.format(len(self.planet_list)), fontsize=22)
         ax.grid(True)
 
         plt.show()
