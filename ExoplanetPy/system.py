@@ -8,8 +8,8 @@ import seaborn as sns
 sns.set()
 style.use('seaborn-talk')
 
-import sys
-numpy.set_printoptions(threshold=sys.maxsize)
+#import sys
+#numpy.set_printoptions(threshold=sys.maxsize)
 
 class System:
     def __init__(self, star_prop: dict, planet_list, sort=True):
