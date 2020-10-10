@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp
 
+
 class Planet:
     def __init__(self, e=0.0, a=0.0, omega=0.0, Omega=0.0, i=0.0, r_p=0.0, first_periastron=0):
         self.e = e  # eccentricity
