@@ -9,4 +9,5 @@ setup(name='ExoplanetPy',
       author_email='arnav257@gmail.com',
       url='https://github.com/ExoplanetPy/ExoplanetPy',
       packages=['ExoplanetPy'],
+      install_requires=['numpy','matplotlib','scipy','seaborn']
      )
