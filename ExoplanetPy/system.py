@@ -2,18 +2,18 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-# from planet import Planet
+from matplotlib.pyplot import style
+import seaborn as sns
 
-import numpy
-import sys
-numpy.set_printoptions(threshold=sys.maxsize)
+sns.set()
+style.use('seaborn-talk')
 
 
 class System:
     def __init__(self, star_prop: dict, planet_list, sort=True):
         self.star_prop = star_prop
         if sort:
-            self.planet_list = sorted(planet_list, key=lambda p: p.a)  # if planet object not dictionary
+            self.planet_list = sorted(planet_list, key=lambda p: p.a)
         else:
             self.planet_list = planet_list
         self.img_split = 100
@@ -113,11 +113,7 @@ class System:
         ax.tick_params(axis='y', labelsize=14)
         ax.set_xlabel('Time in days', fontsize=18)
         ax.set_ylabel('Relative luminosity', fontsize=18)
-        ax.set_title('Multiple Exoplanet - {} Planet system'.format(len(self.planet_list)), fontsize=22)
+        ax.set_title('Transit Curve - {} Planet system'.format(len(self.planet_list)), fontsize=22)
         ax.grid(True)
 
         plt.show()
-
-    def visualise(self):  # not sure what arguments need to be here
-        """Plot actual images from Earth's vantage point"""
-        pass

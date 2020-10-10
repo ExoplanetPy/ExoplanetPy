@@ -1,6 +1,3 @@
-# import sys
-
-# import matplotlib.pyplot as plt
 import numpy as np
 from scipy.integrate import solve_ivp
 
@@ -13,7 +10,7 @@ class Planet:
         self.Omega = Omega  # longitude of ascending node
         self.i = i * (np.pi) / 180  # inclination
         self.r_p = r_p  # planet radius
-        self.first_periastron = first_periastron  # time origin, perhaps keep as a datetime object?
+        self.first_periastron = first_periastron  # time origin
         self.alphas = self.alpha_wrt_time(e=self.e, split=1000, first_periastron=self.first_periastron)
 
     def der_alpha(self, t, alpha, e):
@@ -26,7 +23,6 @@ class Planet:
         y0 = np.array([0])
         sol = solve_ivp(self.der_alpha, t_span, y0, t_eval=t, args=(e,))
         alpha_array = sol.y[0]
-        # return lambda time : alpha_array[int((time%1) * split)]
 
         def alphas(time):
             nonlocal split, alpha_array
@@ -37,7 +33,7 @@ class Planet:
 
         return alphas
 
-    def getOrbitalElements(self):  # returns dictionary of Kepler Orbital elements (everything above except radius and first_periastron)
+    def getOrbitalElements(self):  # returns dictionary of Kepler Orbital elements
         return {'Eccentricity': self.e,
                 'Semi Major Axis': self.a,
                 'Argument of Periapsis': self.omega,
@@ -45,13 +41,10 @@ class Planet:
                 'Inclination': self.i}
 
     def getNu_from_time(self, time):  # returns true anomaly when time is inputted
-        # use solutions of differential equation
+        # Using solutions of differential equations
         return self.alphas(time)
 
     def getPosition_from_nu(self, nu):  # returns position when true anomaly is inputted
-        # n_x = -np.cos(self.i) * np.cos(self.Omega) * np.sin(self.omega + nu) - np.sin(self.Omega) * np.cos(self.omega + nu)
-        # n_y = np.cos(self.Omega) * np.cos(self.omega + nu) - np.cos(self.i) * np.sin(self.Omega) * np.sin(self.omega + nu)
-        # n_z = np.sin(self.i) * np.sin(self.omega + nu)
         angle = nu + self.omega
         n_x = np.cos(angle)
         n_y = np.sin(angle) * np.cos(self.i)
@@ -64,7 +57,7 @@ class Planet:
         position = np.array([r * unit_vector[0], r * unit_vector[1], r * unit_vector[2]])
         return position
 
-    def getPosition(self, time):  # returns position when time is inputted (just combining the above two functions)
+    def getPosition(self, time):  # returns position when time is inputted
         return self.getPosition_from_nu(self.getNu_from_time(time))
 
     def setPeriod(self, period):
