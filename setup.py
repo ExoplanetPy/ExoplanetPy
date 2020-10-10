@@ -29,7 +29,7 @@ setup(
                  "Topic :: Scientific/Engineering :: Astronomy",
                  "Topic :: Scientific/Engineering :: Visualization"],
     keywords='exoplanets, orbits, visualize, astronomy',
-    packages=find_packages(where='ExoplanetPy'),
+    packages=['ExoplanetPy'],
     python_requires='>=3.5, <4',
     install_requires=['numpy', 'matplotlib', 'scipy', 'seaborn'],
 )
