@@ -1,5 +1,5 @@
-from ExoplanetPy.planet import Planet
-from ExoplanetPy.system import System
+import Planet
+import System
 
 p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89.9, r_p=0.1, first_periastron=0.0)
 p2 = Planet(e=0.0, a=2, omega=0, Omega=0, i=89.9, r_p=0.05, first_periastron=0.0)
