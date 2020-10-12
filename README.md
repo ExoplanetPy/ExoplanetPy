@@ -16,10 +16,11 @@ The following orbital elements are set up:
 | *i* | orbital inclination |
 | *r_p* | planet:star radius |
 
-Each `Planet()` can have different initial true anomalies (ν), varied by the `first_periastron` time argument.
+Each `Planet()` can have different initial true anomaly (ν) values, varied by the `first_periastron` time argument.
 
 ## Usage
-Define a single `Planet()` and input as `planet_list` argument in `System()`.
+Define a single `Planet()` and input as `planet_list` argument in `System()`.  
+Limb darkening models are chosen in the `plot()` method.
 ```python
 p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89.9, r_p=0.1, first_periastron=0.0)
 sys = System(star_prop={'Mass': 4}, planet_list=[p1], sort=True)
@@ -27,7 +28,7 @@ sys.plot(model='Quadratic', normalise=True)
 ```
 ![Test Plot 1](ExoplanetPy/test_plots/test_plot_1.png)
 
-With an additional `Planet()` inputted as `planet_list` argument in `System()`.
+Additional `Planet()` objects are inputted as `planet_list` argument in `System()`.
 ```python
 p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89.9, r_p=0.1, first_periastron=0.0)
 p2 = Planet(e=0.0, a=2, omega=0, Omega=0, i=89.9, r_p=0.05, first_periastron=0.0)
