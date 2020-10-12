@@ -7,14 +7,14 @@ To obtain transit curves, set up the Keplerian orbital elements for each planet 
 The `Planet()` class handles each planet's orbital elements, and the `System()` class can be used to plot the final transit curves.
 
 The following orbital elements are set up:
-| Variable | Element |
+| **Variable** | **Element** |
 | ------ | ------ |
-| e | eccentricity |
-| a | semi-major axis |
-| omega | argument of periapsis (ω) |
-| Omega | longitude of ascending node (Ω) |
-| i | orbital inclination |
-| r_p | planet:star radius |
+| *e* | eccentricity |
+| *a* | semi-major axis |
+| *omega* | argument of periapsis (ω) |
+| *Omega* | longitude of ascending node (Ω) |
+| *i* | orbital inclination |
+| *r_p* | planet:star radius |
 
 Each `Planet()` can have different initial true anomalies (ν), varied by the `first_periastron` time argument.
 
@@ -44,5 +44,5 @@ ExoplanetPy has the following dependencies:
 * [Seaborn](https://seaborn.pydata.org/) (stylize plots)
 
 ## License 
-MIT License
+MIT License  
 © 2020 ExoplanetPy
