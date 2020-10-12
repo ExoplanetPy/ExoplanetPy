@@ -25,7 +25,7 @@ from ExoplanetPy import Planet
 from ExoplanetPy import System
 ```
 
-Define a single `Planet()` and input as `planet_list` argument in `System()`.  
+Define a single `Planet()` and input as `planet_list` arguments in `System()`.  
 Limb darkening models are chosen in the `plot()` method.
 ```python
 p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89.9, r_p=0.1, first_periastron=0.0)
