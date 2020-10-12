@@ -1,7 +1,7 @@
 # ExoplanetPy 
 
-ExoplanetPy is a python package for modelling the transit light curves of systems with multiple exoplanets orbiting around their host stars.
-To obtain transit curves, set up the Keplerian orbital elements for each planet in the system.
+ExoplanetPy is a python package for modelling the transit light curves of systems with multiple exoplanets orbiting around their host stars.  
+To obtain transit curves, simply set up the Keplerian orbital elements for each planet in the system.
 ![alt text](images/logo_400.png "ExoplanetPy logo")
 
 The `Planet()` class handles each planet's orbital elements, and the `System()` class can be used to plot the final transit curves.
