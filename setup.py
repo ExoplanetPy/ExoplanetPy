@@ -11,6 +11,7 @@ setup(
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ExoplanetPy/ExoplanetPy',
+    download_url='https://github.com/ExoplanetPy/ExoplanetPy/archive/0.0.1.tar.gz'
     author='A. Das, D. Jain',
     author_email='arnav257@gmail.com, devansh.dvj@gmail.com',
     classifiers=["Development Status :: 2 - Pre-Alpha",
