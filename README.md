@@ -19,6 +19,12 @@ The following orbital elements are set up:
 Each `Planet()` can have different initial true anomaly (ν) values, varied by the `first_periastron` time argument.
 
 ## Usage
+Modules can be accessed using the following imports.
+```python
+from ExoplanetPy import Planet
+from ExoplanetPy import System
+```
+
 Define a single `Planet()` and input as `planet_list` argument in `System()`.  
 Limb darkening models are chosen in the `plot()` method.
 ```python
