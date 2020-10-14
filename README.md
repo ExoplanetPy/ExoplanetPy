@@ -2,7 +2,7 @@
 
 ExoplanetPy is a python package for modelling the transit light curves of systems with multiple exoplanets orbiting around their host stars.
 To obtain transit curves, set up the Keplerian orbital elements for each planet in the system.
-![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/blob/master/images/logo_400.png "ExoplanetPy logo")
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/master/images/logo_400.png "ExoplanetPy logo")
 
 The `Planet()` class handles each planet's orbital elements, and the `System()` class can be used to plot the final transit curves.
 
@@ -40,7 +40,7 @@ p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89.9, r_p=0.1, first_periastron=0.0)
 sys = System(star_prop={'Mass': 4}, planet_list=[p1], sort=True)
 sys.plot(model='Quadratic', normalise=True)
 ```
-![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/blob/master/ExoplanetPy/test_plots/test_plot_1.png "Test Plot 1")
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/master/ExoplanetPy/test_plots/test_plot_1.png "Test Plot 1")
 
 Additional `Planet()` objects are inputted as `planet_list` argument in `System()`.
 ```python
@@ -49,7 +49,7 @@ p2 = Planet(e=0.0, a=2, omega=0, Omega=0, i=89.9, r_p=0.05, first_periastron=0.0
 sys = System(star_prop={'Mass': 4}, planet_list=[p1,p2], sort=True)
 sys.plot(model='Quadratic', normalise=True)
 ```
-![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/blob/master/ExoplanetPy/test_plots/testv0_plot.png "Test Plot 2")
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/master/ExoplanetPy/test_plots/testv0_plot.png "Test Plot 2")
 
 ## Dependencies
 ExoplanetPy has the following dependencies:
