@@ -6,13 +6,13 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='ExoplanetPy',
-    version='0.0.2',
+    version='0.0.3',
     description='Package for Multiple exoplanet system modelling',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ExoplanetPy/ExoplanetPy',
-    author='A. Das, D. Jain',
-    author_email='arnav257@gmail.com, devansh.dvj@gmail.com',
+    author='Arnav Das & Devansh Jain',
+    author_email='arnav257@gmail.com',
     classifiers=["Development Status :: 2 - Pre-Alpha",
                  "Intended Audience :: Science/Research",
                  "License :: OSI Approved :: MIT License",
