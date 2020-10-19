@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='ExoplanetPy',
     version='0.1.1',
-    description='Package for Multiple exoplanet system modelling',
+    description='Package for multiple exoplanet system modelling',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/ExoplanetPy/ExoplanetPy',
