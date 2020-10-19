@@ -64,11 +64,14 @@ The `visualize()` method allows the user to obtain visual images of the actual t
 sys.visualize(time=0.26, model='Quadratic')
 ```
 ![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/0.1.1/ExoplanetPy/test_plots/visualize-0.26.png ".visualize(0.26)")
+
 Changing the fractional time parameter allows the user to obtain images at any point during transit. 
 ```python
 sys.visualize(time=0.27, model='Quadratic')
 ```
 ![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/0.1.1/ExoplanetPy/test_plots/visualize-0.27.png ".visualize(0.27)")
+
+Similarly, for `time=0.28`:
 ```python
 sys.visualize(time=0.28, model='Quadratic')
 ```
