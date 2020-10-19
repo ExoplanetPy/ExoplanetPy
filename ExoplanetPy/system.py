@@ -117,3 +117,32 @@ class System:
         ax.grid(True)
 
         plt.show()
+
+    def visualize(self, time, model='Quadratic'):
+        """Plot the image given time (in fraction)"""
+        if model == 'Quadratic':
+            self.u = [0.1, 0.2]
+            self.star, self.total = self.initialize_star(limb_func=self.limb_dark, split=self.img_split)
+        else:
+            raise NameError("Model does not exist")
+
+        update, get_lum, get_star = self.lum_wrt_coord(copy.deepcopy(self.star), copy.deepcopy(self.total))
+        timing = self.total_time * time
+        for planet in self.planet_list:
+            x, y, z = planet.getPosition(timing / planet.period)
+            if y * (planet.i - (np.pi / 2)) > 0:  # Only the part of orbit which is away from us
+                continue
+            if x**2 + y**2 > 2 * ((1 + planet.r_p)**2):
+                continue
+
+            update(x, y, planet.r_p)
+
+        fig = plt.figure(figsize=(6, 6))
+        ax = fig.add_subplot(111)
+        ax.imshow(get_star(), 'gray')
+        ax.set_title('Image at Fractional Time {}'.format(time), fontsize=16)
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.grid(False)
+
+        plt.show()
