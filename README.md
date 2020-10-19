@@ -32,7 +32,7 @@ Access the modules using the following statements.
 from ExoplanetPy import Planet
 from ExoplanetPy import System
 ```
-
+### Transit Curves
 Define a single `Planet()` and input as `planet_list` argument in `System()`.  
 Limb darkening models are chosen in the `plot()` method.
 ```python
@@ -50,6 +50,29 @@ sys = System(star_prop={'Mass': 4}, planet_list=[p1,p2], sort=True)
 sys.plot(model='Quadratic', normalise=True)
 ```
 ![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/master/ExoplanetPy/test_plots/testv0_plot.png "Test Plot 2")
+
+### Direct Imaging
+Take the following planetary system:
+```python
+p1 = Planet(e=0.0, a=8, omega=0, Omega=0, i=89, r_p=0.1, first_periastron=0.03)
+p2 = Planet(e=0.0, a=4, omega=0, Omega=0, i=89, r_p=0.07, first_periastron=0.52)
+p3 = Planet(e=0.0, a=2, omega=0, Omega=0, i=87, r_p=0.05, first_periastron=0.0)
+sys = System(star_prop={'Mass': 4}, planet_list=[p1, p3, p2], sort=True)
+```
+The `visualize()` method allows the user to obtain visual images of the actual transit.
+```python
+sys.visualize(time=0.26, model='Quadratic')
+```
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/0.1.1/ExoplanetPy/test_plots/visualize-0.26.png ".visualize(0.26)")
+Changing the fractional time parameter allows the user to obtain images at any point during transit. 
+```python
+sys.visualize(time=0.27, model='Quadratic')
+```
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/0.1.1/ExoplanetPy/test_plots/visualize-0.27.png ".visualize(0.27)")
+```python
+sys.visualize(time=0.28, model='Quadratic')
+```
+![](https://raw.githubusercontent.com/ExoplanetPy/ExoplanetPy/0.1.1/ExoplanetPy/test_plots/visualize-0.28.png ".visualize(0.28)")
 
 ## Dependencies
 ExoplanetPy has the following dependencies:
