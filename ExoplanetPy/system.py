@@ -10,13 +10,14 @@ style.use('seaborn-talk')
 
 
 class System:
-    def __init__(self, star_prop: dict, planet_list, sort=True):
+    def __init__(self, star_prop: dict, planet_list, sort=True, model='Quadratic'):
         self.star_prop = star_prop
         if sort:
             self.planet_list = sorted(planet_list, key=lambda p: p.a)
         else:
             self.planet_list = planet_list
         self.img_split = 100
+        self.img_split_vis = 1000
         self.time_split = 10000
         self.n = 2.0
         period_constant = (2 * np.pi) / ((scipy.constants.G * self.star_prop['Mass'] * 1.989e30)**0.5)
@@ -25,8 +26,14 @@ class System:
         self.total_time = max([planet.period for planet in self.planet_list])
         for planet in self.planet_list:
             planet.setSplit(self.time_split * planet.period / self.total_time)
+        if model == 'Quadratic':
+            self.u = [0.1, 0.2]
+            self.star, self.total = self.initialize_star(limb_func=self.limb_dark, split=self.img_split)
+            self.star_vis, self.total_vis = self.initialize_star(limb_func=self.limb_dark, split=self.img_split_vis)
+        else:
+            raise NameError("Model does not exist")
 
-    def initialize_star(self, limb_func, split=1000):
+    def initialize_star(self, limb_func, split):
         star = np.zeros((2 * split + 1, 2 * split + 1))
         total = 0
         for i in range(-split, split + 1):
@@ -77,12 +84,7 @@ class System:
     def getPosition(self, index, time):
         return self.planet_list[index].getPosition(time)
 
-    def calc_lum(self, model='Quadratic', normalise=False):
-        if model == 'Quadratic':
-            self.u = [0.1, 0.2]
-            self.star, self.total = self.initialize_star(limb_func=self.limb_dark, split=self.img_split)
-        else:
-            raise NameError("Model does not exist")
+    def calc_lum(self, normalise=False):
         self.timespan = np.linspace(0, int(self.n) * self.total_time, int(self.n) * self.time_split + 1)
         lum = []
         for timing in self.timespan:
@@ -101,9 +103,9 @@ class System:
             lum = lum / max(lum)
         return lum
 
-    def plot(self, model='Quadratic', normalise=False):
+    def plot(self, normalise=False):
         """Plot the transit curve"""
-        lum = self.calc_lum(model, normalise)
+        lum = self.calc_lum(normalise)
 
         fig = plt.figure(figsize=(10, 6))
         ax = fig.add_subplot(111)
@@ -118,15 +120,9 @@ class System:
 
         plt.show()
 
-    def visualize(self, time, model='Quadratic'):
+    def visualize(self, time):
         """Plot the image given time (in fraction)"""
-        if model == 'Quadratic':
-            self.u = [0.1, 0.2]
-            self.star, self.total = self.initialize_star(limb_func=self.limb_dark, split=self.img_split)
-        else:
-            raise NameError("Model does not exist")
-
-        update, get_lum, get_star = self.lum_wrt_coord(copy.deepcopy(self.star), copy.deepcopy(self.total))
+        update, get_lum, get_star = self.lum_wrt_coord(copy.deepcopy(self.star_vis), copy.deepcopy(self.total_vis))
         timing = self.total_time * time
         for planet in self.planet_list:
             x, y, z = planet.getPosition(timing / planet.period)
@@ -134,7 +130,6 @@ class System:
                 continue
             if x**2 + y**2 > 2 * ((1 + planet.r_p)**2):
                 continue
-
             update(x, y, planet.r_p)
 
         fig = plt.figure(figsize=(6, 6))
